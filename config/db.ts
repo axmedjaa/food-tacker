@@ -1,9 +1,8 @@
 import mongoose from "mongoose"
-import dotenv from "dotenv"
-dotenv.config()
+import { config } from "./config.js"
 const connectDb=async():Promise<void>=>{
     try {
-        const url=process.env.NODE_ENV==="development"?process.env.MONGODB_URL_DEV:process.env.MONGODB_URL_BRO
+        const url=config.mongodbUri
         if(!url){
             throw new Error("MONGODB_URL not found")
         }
