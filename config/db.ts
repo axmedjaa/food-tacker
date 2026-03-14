@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
-
+import dotenv from "dotenv"
+dotenv.config()
 const connectDb=async():Promise<void>=>{
     try {
         const url=process.env.NODE_ENV==="development"?process.env.MONGODB_URL_DEV:process.env.MONGODB_URL_BRO
