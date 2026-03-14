@@ -14,6 +14,14 @@ app.use(express.urlencoded({extended:true}))
 app.use("/api/auth",authrouter)
 app.use("/api/food",footRouter)
 app.use("/api/reports",reportsRouter)
+app.get("/", (req: Request, res: Response) => {
+  res.json({
+    message: "Welcome to colorie trucker API",
+    version: "1.0.0",
+    status: "success",
+    timestamp: new Date().toISOString(),
+  });
+});
 // error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
