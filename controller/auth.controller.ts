@@ -66,3 +66,26 @@ export const getUsr=async(req:Request,res:Response)=>{
         res.status(500).json({message:"Something went wrong"})
     }
 }
+export const updateProfile=async(req:Request,res:Response)=>{
+    try {
+        const{name,dailyColorieGoal,onboardingCompleted}=req.body
+        const user=await User.findById(req.user?._id)
+        if(!user){
+            return res.status(404).json({message:"User not found"})
+        }
+        if(name) user.name=name
+        if(dailyColorieGoal) user.dailyColorieGoal=dailyColorieGoal
+        if(onboardingCompleted!==undefined) user.onboardingCompleted=onboardingCompleted
+        await user.save()
+        return res.status(200).json({
+            id:user._id,
+            name:user.name,
+            email:user.email,
+            dailyColorieGoal:user.dailyColorieGoal,
+            onboardingCompleted:user.onboardingCompleted
+        })
+    } catch (error) {
+        console.log(error) 
+        return res.status(500).json({message:"failed to update user"})  
+    }
+}
