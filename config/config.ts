@@ -9,5 +9,5 @@ export const config = {
     r2AccessKeyId: process.env.R2_ACCESS_KEY,
     r2SecretAccessKey: process.env.R2_SECRET_KEY,
     r2AccountId: process.env.R2_ACCOUNT_ID,
-    r2PublicUrl: process.env.OPENAI_API_KEY,
+    r2PublicUrl: process.env.R2_PUBLIC_URL,
 }
