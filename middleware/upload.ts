@@ -14,7 +14,7 @@ const filter=(req:Request,file:Express.Multer.File,cb:multer.FileFilterCallback)
 const uplode=multer({
     storage,
     limits:{
-        fileSize:10*1024*1024
+        fileSize: 4 * 1024 * 1024
     },
     fileFilter:filter
 })
