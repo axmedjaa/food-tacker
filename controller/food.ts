@@ -105,14 +105,14 @@ export const analyzFoodImage=async(req:Request,res:Response):Promise<void>=>{
 }
 export const safeFoodentry=async(req:Request,res:Response):Promise<void>=>{
     try {
-        const{foodname,calories,protein,fat,carbs,mealType,imageUrl,storageKey}=req.body
-    if(!foodname||!calories===undefined||!imageUrl||!storageKey){
+        const{foodName,calories,protein,fat,carbs,mealType,imageUrl,storageKey}=req.body
+    if(!foodName||calories===undefined||!imageUrl||!storageKey){
         res.status(400).json({message:"all fields are required except protein,fat and carbs"})
         return
     }
     const foodEntry=await FoodEntry.create({
         userId:req.user?._id,
-        foodName:foodname,
+        foodName:foodName,
         calories,
         protein,
         fat,

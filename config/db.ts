@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "./config.js";
-
 // 1. Create a variable OUTSIDE the function to cache the connection
 let isConnected = false;
-
 const connectDb = async (): Promise<void> => {
     // 2. If already connected, don't try again (This is the "Forever" fix)
     if (isConnected) {
