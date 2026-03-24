@@ -6,5 +6,5 @@ const footRouter = Router();
 footRouter.post('/',protect,uplode.single('image'),footScanner)
 footRouter.post('/analyze',protect,uplode.single('image'),analyzFoodImage)
 footRouter.post('/save',protect,safeFoodentry)
-footRouter.delete('/discard',protect,discardAnalyedFood)
+footRouter.post('/discard',protect,discardAnalyedFood)
 export default footRouter;
