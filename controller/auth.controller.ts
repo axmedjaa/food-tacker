@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
 import User from "../models/User.js"
 import jwt from "jsonwebtoken"
+import { config } from "../config/config.js"
 const generateToken=(userId:string)=>{
-    return jwt.sign({userId},process.env.JWt_Token as string,{expiresIn:"30d"})
+    return jwt.sign({userId},config.jwtSecret as string,{expiresIn:"30d"})
 }
 interface IUser{
     name:string,

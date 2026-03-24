@@ -22,7 +22,7 @@ const optimizeImage=async(buffer:Buffer):Promise<Buffer>=>{
 }
 const uploadR2=async(buffer:Buffer):Promise<{url:string,keyName:string}>=>{
     const fileName=`${crypto.randomBytes(16).toString("hex")}.jpg`
-    const keyName=`foot-trucker/${fileName}`
+    const keyName=`food/${fileName}`
     try {
         const command=new PutObjectCommand({
             Bucket:r2Config.bucketName,
