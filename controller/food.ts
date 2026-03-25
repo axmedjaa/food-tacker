@@ -176,7 +176,7 @@ export const getEnteries=async(req:Request,res:Response):Promise<void>=>{
         const entries=await FoodEntry.find(query)
         .sort({timestamp:-1})
         .limit(parseInt(limit as string))
-        res.json({entries})
+        res.json(entries)
     } catch (error) {
         console.log(error)
         const errorMessage=error instanceof Error?error.message:"unknown error"
