@@ -108,7 +108,8 @@ interface WeeklySummary {
 }
 
 export const getDailySummery=async(userid:string|Types.ObjectId,date:Date=new Date()):Promise<DailySummary>=>{
-    const startOfDay=new Date(date)
+    const d = typeof date === 'string' ? new Date(date) : date;
+    const startOfDay=new Date(d)
     startOfDay.setHours(0,0,0,0)
     const endOfDay=new Date(date)
     endOfDay.setHours(23,59,59,999)
