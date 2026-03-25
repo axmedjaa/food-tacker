@@ -108,11 +108,10 @@ interface WeeklySummary {
 }
 
 export const getDailySummery=async(userid:string|Types.ObjectId,date:Date=new Date()):Promise<DailySummary>=>{
-    const d = typeof date === 'string' ? new Date(date) : date;
-    const startOfDay=new Date(d)
-    startOfDay.setUTCHours(0,0,0,0)
-    const endOfDay=new Date(d)
-    endOfDay.setUTCHours(23,59,59,999)
+    const startOfDay=new Date(date)
+    startOfDay.setHours(0,0,0,0)
+    const endOfDay=new Date(date)
+    endOfDay.setHours(23,59,59,999)
     const userIdObjectId=typeof userid==='string'?new Types.ObjectId(userid):userid
     const[result]=await FoodEntry.aggregate<{mealStats:MealStats[],overAllStats:OverallStats[]}>([
         {
@@ -135,7 +134,7 @@ export const getDailySummery=async(userid:string|Types.ObjectId,date:Date=new Da
                         }
                     }
                 ],
-                overallStats:[
+                overAllStats:[
                     {
                         $group:{
                             _id:null,
