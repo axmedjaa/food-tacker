@@ -7,7 +7,7 @@ export const getDaily = async (req: Request, res: Response): Promise<void> => {
       res.status(401).json({ message: "Unauthorized" });
       return;
     }
-    const { date } = req.params;
+    const { date } = req.query;
     const targetDate =
       date && typeof date === "string" ? new Date(date) : new Date();
     const user = await User.findById(req.user._id).select("-password");
