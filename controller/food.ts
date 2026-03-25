@@ -151,3 +151,35 @@ export const discardAnalyedFood=async(req:Request,res:Response):Promise<void>=>{
         res.status(500).json({message:"Something went wrong"})
     }
 }
+export const getEnteries=async(req:Request,res:Response):Promise<void>=>{
+    try {
+        if(!req.user?._id){
+            res.status(401).json({message:"Unauthorized"})
+            return
+        }
+        const{date,startDate,endDate,limit=50}=req.query
+        let query:Record<string,unknown>={userId:req.user?._id}
+        if(date&&typeof date==="string"){
+            const targetDate=new Date(date)
+            const startedDate=new Date(targetDate)
+            startedDate.setHours(0,0,0,0)
+            const endedDate=new Date(targetDate)
+            endedDate.setHours(23,59,59,999)
+            query.timestamp={$gte:startedDate,$lte:endedDate}
+        }
+        if(startDate&&typeof startDate==="string"&&endDate&&typeof endDate==="string"){
+           query.timestamp={
+            $gte:new Date(startDate),
+            $lte:new Date(endDate)
+           }
+        }
+        const entries=await FoodEntry.find(query)
+        .sort({timestamp:-1})
+        .limit(parseInt(limit as string))
+        res.json({entries})
+    } catch (error) {
+        console.log(error)
+        const errorMessage=error instanceof Error?error.message:"unknown error"
+        res.status(500).json({message:errorMessage})
+    }
+}
